@@ -29,3 +29,24 @@ export const useMount = (callback: () => void) => {
         callback()
     }, [])
 }
+
+export const useArray = <T>(initialArray: T[]) => {
+    const [value, setValue] = useState(initialArray)
+    const add = (person: T) => {
+        setValue([...value, person])
+    }
+    const removeIndex = (index: number) => {
+        let arr = value
+        arr.splice(index, 1)
+        setValue([...arr])
+    }
+    const clear = () => {
+        setValue([])
+    }
+    return {
+        add,
+        removeIndex,
+        clear,
+        value,
+    }
+}
